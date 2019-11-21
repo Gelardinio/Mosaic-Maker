@@ -4,6 +4,7 @@ import cv2
 from PIL import Image, ImageTk
 Image.MAX_IMAGE_PIXELS = None
 import numpy as np
+import shutil
 
 os.chdir('C:\ISU')
 
@@ -33,7 +34,7 @@ create_folders("Images")
 create_folders("ImageOutput")
 create_folders("MainOutput")
 
-count = 0
+photoTaken = False
 
 def _from_rgb(rgb):
     return "#%02x%02x%02x" % rgb   
@@ -41,25 +42,48 @@ def _from_rgb(rgb):
 def runPrg(): 
     package=e1.get()
     KEYWORDS.append(package)
-    package=e2.get()
-    KEYWORDS.append(package)
+    try:
+        package=e2.get()
+        KEYWORDS.append(package)
+    except:
+        global photoTaken
+        photoTaken = True
+
     master.destroy()
 
 def close_window(): 
     print(isRun)
+
+def take_picture():
+    cam = cv2.VideoCapture(0)
+    retval, frame = cam.read()
+    if retval != True:
+        raise ValueError("Can't read frame")
+
+    cv2.imwrite('Images/Keyword2/userphoto.png', frame)
+    #cv2.imshow("img1", frame)
+    cv2.waitKey()
+    e2.destroy()
     
 def makeMain():
     global master
     master = tk.Tk()
     master.title("Mosaic Maker")
 
-    master.configure(background=_from_rgb((105, 162, 176)))
-
     master.minsize(500, 200)
+   
+    imageLoc = 'background.jpeg'
 
-    Label1 = tk.Label(master, text="First Keyword", font=("Courier", 20), background=_from_rgb((105, 162, 176))).grid(row=0, column=0)
+    canvas = tk.Canvas(master, width=500, height=200)
+    
+    canvas.pack()
 
-    Label2 = tk.Label(master, text="Second Keyword", font=("Courier", 20), background=_from_rgb((105, 162, 176))).grid(row=1, column=0)
+    img = ImageTk.PhotoImage(Image.open(imageLoc).resize((500, 200), Image.ANTIALIAS))
+    canvas.background = img  # Keep a reference in case this code is put in a function.
+    bg = canvas.create_image(0, 0, anchor=tk.NW, image=img)
+
+    canvas.create_text(120,20, text="First Keyword", font=("Courier", 20))
+    canvas.create_text(120,55, text="Second Keyword", font=("Courier", 20))
 
     quitButton = tk.Button(master, text="Quit",font=("Courier", 20), command = close_window)
     quitButton.configure(background= _from_rgb((160, 163, 161))) 
@@ -70,6 +94,11 @@ def makeMain():
     runButton.place(x=320, y=140)
     runButton.config(width = 10, height = 1)
 
+    vidButton = tk.Button(master, text="Take a picture",font=("Courier", 15), command = take_picture)
+    vidButton.configure(background=_from_rgb((245, 158, 66)))
+    vidButton.place(x=10, y=90)
+
+
     global e1
     e1 = tk.Entry(master,width=20, font=("Courier", 15), background=_from_rgb((48, 189, 240)))
     e1.place(x = 240, y = 9)
@@ -79,26 +108,10 @@ def makeMain():
 
     master.mainloop()
 
-cam = cv2.VideoCapture(0)
-retval, frame = cam.read()
-if retval != True:
-    raise ValueError("Can't read frame")
-
-cv2.imwrite('img2.png', frame)
-cv2.imshow("img1", frame)
-cv2.waitKey()
-
-vidcap = cv2.VideoCapture('big_buck_bunny_720p_5mb.mp4')
-success,image = vidcap.read()
-count = 0
-while success:
-  cv2.imwrite("MainOutput\frame%d.jpg" % count, image)     # save frame as JPEG file      
-  success,image = vidcap.read()
-  print('Read a new frame: ', success)
-  count += 1
-
 makeMain()
 print(KEYWORDS)
+
+count = 0
 
 master = tk.Tk()
 master.title("Mosaic Maker")
@@ -110,7 +123,7 @@ master.minsize(500, 200)
 Label1 = tk.Label(master, text="Processing", font=("Courier", 20), background=_from_rgb((105, 162, 176)))
 Label1.place(x = 150, y = 30)
 
-master.quit()
+master.after(3000, master.destroy())
 master.mainloop()
 
 
@@ -130,24 +143,24 @@ while count < 1:
         img = Image.open(os.path.join(Keyword1_Directory, file))
         count = count + 1
 
+if photoTaken == False:
+    arguments = {
+        "keywords":KEYWORDS[1],
+        "limit":1,
+        "output_directory":'Images',
+        "image_directory":'Keyword2',
+        "print_urls": False,
+        "type":"photo",
+        "format":'jpg',
+    }
 
-arguments = {
-    "keywords":KEYWORDS[1],
-    "limit":1,
-    "output_directory":'Images',
-    "image_directory":'Keyword2',
-    "print_urls": False,
-    "type":"photo",
-    "format":'jpg',
-}
+    count = 0
 
-count = 0
-
-while count < 1: 
-    download_images(arguments)
-    for file in os.listdir(Keyword2_Directory):
-        img = Image.open(os.path.join(Keyword2_Directory, file))
-        count = count + 1
+    while count < 1: 
+        download_images(arguments)
+        for file in os.listdir(Keyword2_Directory):
+            img = Image.open(os.path.join(Keyword2_Directory, file))
+            count = count + 1
 
 
 for file in os.listdir(Keyword1_Directory):
@@ -282,6 +295,7 @@ panel = tk.Label(master, image = img2)
 panel.pack(side = "bottom", fill = "both", expand = "yes")
 master.mainloop()
 
+shutil.rmtree(Keyword2_Directory)
 
 #os.remove(Keyword1_Directory)
 #os.remove(Keyword2_Directory)
