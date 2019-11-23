@@ -5,6 +5,7 @@ from PIL import Image, ImageTk
 Image.MAX_IMAGE_PIXELS = None
 import numpy as np
 import shutil
+from tqdm import tqdm
 
 os.chdir('C:\ISU')
 
@@ -31,6 +32,7 @@ def create_folders(folder_name):
         print ('Error: Creating directory. ' +  folder_name)
 
 create_folders("Images")
+create_folders("Images/Keyword2")
 create_folders("ImageOutput")
 create_folders("MainOutput")
 
@@ -72,9 +74,9 @@ def makeMain():
 
     master.minsize(500, 200)
    
-    imageLoc = 'background.jpeg'
+    imageLoc = 'reference.PNG'
 
-    canvas = tk.Canvas(master, width=500, height=200)
+    canvas = tk.Canvas(master, width=500, height=200, highlightthickness=0)
     
     canvas.pack()
 
@@ -90,7 +92,7 @@ def makeMain():
     quitButton.place(x=10, y= 140)
 
     runButton = tk.Button(master, text="Run",font=("Courier", 20), command = runPrg)
-    runButton.configure(background=_from_rgb((101, 145, 87)))
+    runButton.configure(background=_from_rgb((4, 135, 6)))
     runButton.place(x=320, y=140)
     runButton.config(width = 10, height = 1)
 
@@ -280,8 +282,6 @@ for file in os.listdir(Keyword2_Directory):
 
             img2.paste(images[index_total], (x_offset, y_offset))
             x_offset = x_offset + 50
-                
-        print(str(int(difference_total)))
         y_offset = y_offset + 50 
     img2.save('firsttest.jpg')
 
