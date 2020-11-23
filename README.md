@@ -1,6 +1,4 @@
-# 4-isu-gerald
-4-isu-gerald created by GitHub Classroom
+# Mosaic-Maker
+## Description
 
-- To run the program without python, go to ISU Executable - Functions - Functions.exe
-- If running the code, read the comments in the images_downloader.py program to adjust to the computer directory
-
+This mosaic maker makes mosaics of two specified keyword objects that the user specifies. For example if the user inputs the keywords ```orange``` and ```apple```, the mosaic maker will search google for 100 images of apples and create a mosaic resembling an orange out of pictures of apples. Mosaic density/accuracey is user-specified.
