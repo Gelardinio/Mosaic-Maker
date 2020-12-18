@@ -5,7 +5,7 @@ This mosaic maker makes mosaics of two specified keyword objects that the user s
 
 ## Video Example
 
-Solarized dark             |  Solarized Ocean
+Mosaic Version             |  Original Version
 :-------------------------:|:-------------------------:
 ![/Photos/compare2.gif](/Photos/compare2.gif)  |  ![/Photos/compare1.gif](/Photos/compare1.gif)
 
