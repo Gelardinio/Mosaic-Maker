@@ -9,5 +9,6 @@ Original Version             |  Mosaic Version
 :-------------------------:|:-------------------------:
 ![/Photos/compare2.gif](/Photos/compare2.gif)  |  ![/Photos/compare1.gif](/Photos/compare1.gif)
 
+### Closer Look
 
-
+![/Photos/sample.png](/Photos/sample.png)
