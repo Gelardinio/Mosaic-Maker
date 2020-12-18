@@ -5,4 +5,4 @@ This mosaic maker makes mosaics of two specified keyword objects that the user s
 
 ## Example
 
-![/Photos/compare2.gif](http://i.imgur.com/2IGQJ2D.jpg)
+![/Photos/compare2.gif](/Photos/compare2.gif)
