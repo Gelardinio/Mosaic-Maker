@@ -12,3 +12,5 @@ Original Version             |  Mosaic Version
 ### Closer Look
 
 ![/Photos/sample.png](/Photos/sample.png)
+
+The gif above was made through hundreds of mosaics. The input keyword in this scenario was the video and the second keyword was the word "colour"
