@@ -9,6 +9,9 @@ Original Version             |  Mosaic Version
 :-------------------------:|:-------------------------:
 ![/Photos/input.jpg](/Photos/input.jpg)  |  ![/Photos/output.PNG](/Photos/output.PNG)
 
+### Closer Look
+
+
 ## Video Example
 
 Original Version             |  Mosaic Version
