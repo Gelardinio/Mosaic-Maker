@@ -11,11 +11,11 @@ Original Version             |  Mosaic Version
 
 ### Closer Look
 
-![/Photos/closer.png](/Photos/closer.png)
+![/Photos/closer.png](/Photos/closer.PNG)
 
 ### Even Closer Look
 
-![/Photos/evencloser.png](/Photos/evencloser.png)
+![/Photos/evencloser.png](/Photos/evencloser.PNG)
 
 The photo was made by the first keyword "landscape" and the second keyword "orange"
 
