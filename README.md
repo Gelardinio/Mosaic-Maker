@@ -7,7 +7,7 @@ This mosaic maker makes mosaics of two specified keyword objects that the user s
 
 Original Version             |  Mosaic Version
 :-------------------------:|:-------------------------:
-![/Photos/compare2.gif](/Photos/compare2.gif)  |  ![/Photos/compare1.gif](/Photos/compare1.gif)
+![/Photos/input.jpg](/Photos/input.jpg)  |  ![/Photos/output.PNG](/Photos/output.PNG)
 
 ## Video Example
 
